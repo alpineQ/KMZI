@@ -1,22 +1,24 @@
+""" Попытка в <150 строчек решить КМЗИ """
 import PySimpleGUI as sg
-from base import get_input, change_text, count_frequency
+from base import *
 
 layout = [
     [sg.Text('Input:'), sg.InputText(), sg.FileBrowse(), sg.Button('Load')],
-    [sg.Text('From:'), sg.InputText(), sg.Text('To:'), sg.InputText(), sg.Button('Back'), sg.Button('Change')],
+    [sg.Text('From:'), sg.InputText(), sg.Text('To:'), sg.InputText(), sg.Button('Cancel'), sg.Button('Change')],
     [sg.Text(size=(64, 20), key='-OUTPUT-'), sg.Text(size=(10, 10)), sg.Text(size=(64, 20), key='-FREQUENCY-')],
 ]
 
 changes = []
 window = sg.Window('Cracking the code', layout)
 
-while True:                             # The Event Loop
+while True:
     event, values = window.read()
     if event == 'Load':
         filepath = 'input1.txt' if values[0] == '' else values[0]
         text = get_input(filepath)
+        str_text = ''
 
-        window['-OUTPUT-'].update(text)
+        window['-OUTPUT-'].update(format_text_string(text))
         frequency_stat = count_frequency(text)
         window['-FREQUENCY-'].update(frequency_stat)
     elif event == 'Change':
@@ -29,19 +31,19 @@ while True:                             # The Event Loop
 
         changes.append(substitute)
         text = change_text(text, substitute)
-        window['-OUTPUT-'].update(text)
 
-    elif event == 'Back':
+        window['-OUTPUT-'].update(format_text_string(text))
+
+    elif event == 'Cancel':
         if len(changes) == 0:
             continue
         substitute = {changes[-1][i]: i for i in changes[-1]}
         text = change_text(text, substitute)
         del changes[-1]
-        window['-OUTPUT-'].update(text)
+
+        window['-OUTPUT-'].update(format_text_string(text))
 
     if event in (None, 'Exit', 'Cancel'):
         break
 
 window.close()
-
-
