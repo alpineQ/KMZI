@@ -1,11 +1,27 @@
 """ Попытка в <150 строчек решить КМЗИ """
 import PySimpleGUI as sg
-from base import *
+from base import get_input, change_text, count_frequency, format_text_string
 
+# pylint: disable=invalid-name
 layout = [
-    [sg.Text('Input:'), sg.InputText(), sg.FileBrowse(), sg.Button('Load')],
-    [sg.Text('From:'), sg.InputText(), sg.Text('To:'), sg.InputText(), sg.Button('Cancel'), sg.Button('Change')],
-    [sg.Text(size=(64, 20), key='-OUTPUT-'), sg.Text(size=(10, 10)), sg.Text(size=(64, 20), key='-FREQUENCY-')],
+    [
+        sg.Text('Input:'),
+        sg.InputText(),
+        sg.FileBrowse(),
+        sg.Button('Load')
+    ],
+    [
+        sg.Text('From:'),
+        sg.InputText(),
+        sg.Text('To:'),
+        sg.InputText(),
+        sg.Button('Cancel'),
+        sg.Button('Change')
+    ],
+    [
+        sg.Text(size=(64, 20), key='-OUTPUT-'),
+        sg.Text(size=(10, 10)), sg.Text(size=(64, 20), key='-FREQUENCY-')
+    ],
 ]
 
 changes = []
