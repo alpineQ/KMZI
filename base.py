@@ -1,7 +1,9 @@
+""" Вспомогательные функции """
 from itertools import zip_longest
 
 
 def get_input(filepath):
+    """ Чтение данных из файла """
     text = []
     with open(filepath) as file:
         for line in file:
@@ -11,6 +13,7 @@ def get_input(filepath):
 
 
 def change_text(text, substitute):
+    """ Простая замена """
     for index, elem in enumerate(text):
         if elem in substitute:
             text[index] = substitute[elem]
@@ -19,26 +22,27 @@ def change_text(text, substitute):
 
 
 def count_frequency(text):
+    """ Подсчёт частотности """
     frequency = {}
     bigrams = {}
     trigrams = {}
 
-    for i in range(len(text)):
-        if text[i] in frequency:
-            frequency[text[i]] += 1
+    for index, elem in enumerate(text):
+        if elem in frequency:
+            frequency[elem] += 1
         else:
-            frequency[text[i]] = 1
+            frequency[elem] = 1
 
         frequency_list = list(frequency.items())
         frequency_list.sort(key=lambda i: i[1])
 
-        bigram = text[i - 1] + ' ' + text[i]
+        bigram = text[index - 1] + ' ' + text[index]
         if bigram in bigrams:
             bigrams[bigram] += 1
         else:
             bigrams[bigram] = 1
 
-        trigram = text[i - 2] + ' ' + text[i - 1] + ' ' + text[i]
+        trigram = text[index - 2] + ' ' + text[index - 1] + ' ' + text[index]
         if trigram in trigrams:
             trigrams[trigram] += 1
         else:
@@ -57,12 +61,18 @@ def count_frequency(text):
     bigrams.update({' ': ' '})
     trigrams.update({' ': ' '})
     output = 'Frequncy\t\tBigrams\t\tTrigrams\n'
-    for freq, bigram, trigram in zip_longest(frequency_list, bigrams_list, trigrams_list, fillvalue=[' ', ' ']):
-        output += f'{freq[0]}: {frequency[freq[0]]}\t\t{bigram[0]}: {bigrams[bigram[0]]}\t\t{trigram[0]}: {trigrams[trigram[0]]}\n'
+    for freq, bigram, trigram in zip_longest(frequency_list,
+                                             bigrams_list,
+                                             trigrams_list,
+                                             fillvalue=[' ', ' ']):
+        output += f'{freq[0]}: {frequency[freq[0]]}\t\t' \
+                  f'{bigram[0]}: {bigrams[bigram[0]]}\t\t' \
+                  f'{trigram[0]}: {trigrams[trigram[0]]}\n'
     return output
 
 
 def format_text_string(text_list):
+    """ Преобразование из списка в строку """
     str_text = ''
     for letter in text_list:
         str_text += letter + ' '
