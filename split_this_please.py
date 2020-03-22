@@ -1,9 +1,10 @@
 """ Разделение данных для шифра разнозначной замены """
+from sys import argv
 # pylint: disable=invalid-name
 
-filepath = 'SRZ.txt'
-print(f'Беру данные из {filepath}')
-with open(filepath) as file:
+input_filepath = 'test_inputs/SRZ.txt' if len(argv) < 2 else argv[1]
+print(f'Беру данные из {input_filepath}')
+with open(input_filepath) as file:
     text = file.read().replace('\n', '')
 
 
@@ -31,7 +32,8 @@ while index < len(text):
         ft_index += 2
         index += 1
 
-with open("formatted_text.txt", "w") as file:
+output_filepath = 'result.txt' if len(argv) < 3 else argv[2]
+with open(output_filepath, "w") as file:
     file.write(formatted_text.rstrip())
 
-print('\nЗаписано в formatted_text.txt')
+print(f'\nЗаписано в {output_filepath}')
