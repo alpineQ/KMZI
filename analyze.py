@@ -30,7 +30,7 @@ window = sg.Window('Cracking the code', layout)
 while True:
     event, values = window.read()
     if event == 'Load':
-        filepath = 'input1.txt' if values[0] == '' else values[0]
+        filepath = 'result.txt' if values[0] == '' else values[0]
         text = get_input(filepath)
         str_text = ''
 
@@ -59,7 +59,7 @@ while True:
 
         window['-OUTPUT-'].update(format_text_string(text))
 
-    if event in (None, 'Exit', 'Cancel'):
+    if event in (None, 'Exit'):
         break
 
 window.close()
