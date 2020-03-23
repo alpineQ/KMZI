@@ -7,7 +7,7 @@ python3 analyze.py
 ```
 ### ПЗ 2
 ```
-In progress
+python3 pz2.py <файл с заданием>
 ```
 ### ПЗ 3
 ```
