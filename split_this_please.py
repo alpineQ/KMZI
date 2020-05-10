@@ -12,7 +12,8 @@ digit_freq = {letter: text.count(letter) for letter in text}
 digit_freq_list = list(digit_freq.items())
 digit_freq_list.sort(key=lambda i: i[1], reverse=True)
 
-most_freq_digit = [digit_freq_list[0][0], digit_freq_list[1][0], digit_freq_list[2][0]]
+# most_freq_digit = [digit_freq_list[0][0], digit_freq_list[1][0], digit_freq_list[2][0]]
+most_freq_digit = ['1', '7', '8']
 
 print('Расставляю пробелы, предполагая, что эти цифры наиболее частотные:')
 for digit in most_freq_digit:
